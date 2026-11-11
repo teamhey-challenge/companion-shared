@@ -75,6 +75,24 @@ function collect(path, out) {
   } else if (path.endsWith('.css')) out.push(path);
 }
 
+const STRAY_SKIP = new Set(['node_modules', '.git', 'storybook-static', '.gradle', 'build', 'dist', '.review']);
+
+/** 규칙 13: packages/ui-web 밖에는 .css 파일이 없다(토큰 dist 제외, 허용 목록 없음). */
+function findStrayCss(root) {
+  const stray = [];
+  const walk = (dir) => {
+    for (const e of readdirSync(dir)) {
+      if (STRAY_SKIP.has(e)) continue;
+      const p = join(dir, e);
+      const rel = p.slice(root.length + 1);
+      if (rel === join('packages', 'ui-web')) continue;
+      if (statSync(p).isDirectory()) walk(p);
+      else if (e.endsWith('.css')) stray.push(rel);
+    }
+  };
+  walk(root);
+  return stray;
+}
 function main() {
   const root = resolve(dirname(fileURLToPath(import.meta.url)), '../../..');
   const args = process.argv.slice(2);
@@ -82,6 +100,12 @@ function main() {
   const files = [];
   for (const t of targets) if (existsSync(t)) collect(t, files);
   let bad = 0;
+  if (!args.length) {
+    for (const rel of findStrayCss(root)) {
+      bad++;
+      console.error(`${rel}: .css 파일은 packages/ui-web 안에만 둘 수 있어요 (docs/architecture.md §4 규칙 13)`);
+    }
+  }
   for (const f of files) {
     for (const p of checkCss(readFileSync(f, 'utf8'))) {
       bad++;
