@@ -1,0 +1,136 @@
+{
+  "$description": "HEY temporary design system tokens (2026-11-12). Single source for web CSS and Android Kotlin. Palette taken from proposal/heyyy-flow.html (ivory, lime, deep green). Replace values when the designer delivers; keep the names.",
+  "color": {
+    "light": {
+      "bg-page": { "$value": "#f4f3ed" },
+      "bg-surface": { "$value": "#fbfaf5" },
+      "bg-raised": { "$value": "#fffefa" },
+      "bg-sunken": { "$value": "#ebeae2" },
+      "bg-inverse": { "$value": "#19251f" },
+      "fg-default": { "$value": "#202820" },
+      "fg-muted": { "$value": "#5a6256" },
+      "fg-subtle": { "$value": "#757d71" },
+      "fg-inverse": { "$value": "#f4f3ed" },
+      "fg-on-accent": { "$value": "#19251f" },
+      "fg-on-primary": { "$value": "#f4f3ed" },
+      "border-default": { "$value": "#dcded3" },
+      "border-strong": { "$value": "#b6bbad" },
+      "accent": { "$value": "#d2f264" },
+      "accent-pressed": { "$value": "#bcdc4c" },
+      "accent-container": { "$value": "#eef8c8" },
+      "primary": { "$value": "#344c37" },
+      "primary-pressed": { "$value": "#26392a" },
+      "focus-ring": { "$value": "#4f6d0c" },
+      "success": { "$value": "#2c7443" },
+      "success-container": { "$value": "#dcefe0" },
+      "warning": { "$value": "#8a5a00" },
+      "warning-container": { "$value": "#f8e9c6" },
+      "danger": { "$value": "#b3261e" },
+      "danger-container": { "$value": "#f9dedb" },
+      "info": { "$value": "#2c5b84" },
+      "info-container": { "$value": "#dde8f2" },
+      "scrim": { "$value": "#00000052" }
+    },
+    "dark": {
+      "bg-page": { "$value": "#111a15" },
+      "bg-surface": { "$value": "#19251f" },
+      "bg-raised": { "$value": "#22302a" },
+      "bg-sunken": { "$value": "#0b110e" },
+      "bg-inverse": { "$value": "#f4f3ed" },
+      "fg-default": { "$value": "#eef0e6" },
+      "fg-muted": { "$value": "#b5bbad" },
+      "fg-subtle": { "$value": "#8d9483" },
+      "fg-inverse": { "$value": "#19251f" },
+      "fg-on-accent": { "$value": "#19251f" },
+      "fg-on-primary": { "$value": "#19251f" },
+      "border-default": { "$value": "#2d3b33" },
+      "border-strong": { "$value": "#46564c" },
+      "accent": { "$value": "#d2f264" },
+      "accent-pressed": { "$value": "#bcdc4c" },
+      "accent-container": { "$value": "#34421a" },
+      "primary": { "$value": "#d2f264" },
+      "primary-pressed": { "$value": "#bcdc4c" },
+      "focus-ring": { "$value": "#e3ff86" },
+      "success": { "$value": "#7fd497" },
+      "success-container": { "$value": "#1d3b27" },
+      "warning": { "$value": "#f2c25c" },
+      "warning-container": { "$value": "#45360f" },
+      "danger": { "$value": "#ff8a80" },
+      "danger-container": { "$value": "#4a1d1a" },
+      "info": { "$value": "#8fc1ec" },
+      "info-container": { "$value": "#1b3247" },
+      "scrim": { "$value": "#00000052" }
+    }
+  },
+  "space": {
+    "$description": "The only spacing steps. Containers own gaps; components have no outer margin.",
+    "4": { "$value": 4 },
+    "8": { "$value": 8 },
+    "16": { "$value": 16 },
+    "24": { "$value": 24 },
+    "32": { "$value": 32 }
+  },
+  "radius": {
+    "sm": { "$value": 8 },
+    "md": { "$value": 12 },
+    "lg": { "$value": 16 },
+    "xl": { "$value": 24 },
+    "full": { "$value": 999 }
+  },
+  "border-width": {
+    "hairline": { "$value": 1 },
+    "strong": { "$value": 2 },
+    "focus": { "$value": 3 }
+  },
+  "font": {
+    "family": { "$value": "Pretendard" },
+    "family-fallback": { "$value": "\"Hiragino Sans\", \"Noto Sans JP\", \"PingFang SC\", \"Noto Sans SC\", system-ui, sans-serif" }
+  },
+  "type": {
+    "$description": "size/lineHeight in px (web) or dp/sp (car). weight is numeric. tracking in em.",
+    "web": {
+      "display": { "size": 32, "lineHeight": 40, "weight": 700, "tracking": -0.02 },
+      "title": { "size": 24, "lineHeight": 32, "weight": 700, "tracking": -0.02 },
+      "heading": { "size": 20, "lineHeight": 28, "weight": 650, "tracking": -0.01 },
+      "body": { "size": 16, "lineHeight": 24, "weight": 400, "tracking": 0 },
+      "body-strong": { "size": 16, "lineHeight": 24, "weight": 600, "tracking": 0 },
+      "label": { "size": 14, "lineHeight": 20, "weight": 600, "tracking": 0 },
+      "caption": { "size": 13, "lineHeight": 20, "weight": 500, "tracking": 0 }
+    },
+    "car": {
+      "hero": { "size": 72, "lineHeight": 88, "weight": 700, "tracking": -0.02 },
+      "title": { "size": 44, "lineHeight": 56, "weight": 700, "tracking": -0.01 },
+      "heading": { "size": 36, "lineHeight": 48, "weight": 650, "tracking": 0 },
+      "body": { "size": 32, "lineHeight": 44, "weight": 500, "tracking": 0 },
+      "label": { "size": 28, "lineHeight": 36, "weight": 650, "tracking": 0 },
+      "caption": { "size": 24, "lineHeight": 32, "weight": 500, "tracking": 0 }
+    }
+  },
+  "size": {
+    "touch-web": { "$value": 44, "$description": "minimum press target on the passenger web" },
+    "touch-car": { "$value": 76, "$description": "minimum press target on the car display (AAOS guidance)" },
+    "touch-car-primary": { "$value": 96 },
+    "icon-web": { "$value": 24 },
+    "icon-car": { "$value": 40 },
+    "content-max-web": { "$value": 480, "$description": "passenger web column width cap" }
+  },
+  "sheet": {
+    "$description": "Bottom sheet geometry (product-foundations 2.3). Not spacing; the sheet component owns these.",
+    "radius": { "$value": 24 },
+    "handle-width": { "$value": 32 },
+    "handle-height": { "$value": 4 },
+    "top-offset": { "$value": 64 },
+    "max-width": { "$value": 640 }
+  },
+  "motion": {
+    "fast": { "$value": 120 },
+    "base": { "$value": 200 },
+    "slow": { "$value": 320 },
+    "easing-standard": { "$value": [0.2, 0, 0, 1] },
+    "easing-exit": { "$value": [0.3, 0, 1, 1] }
+  },
+  "elevation": {
+    "raised": { "$value": "0 1px 2px rgba(25,37,31,0.08), 0 2px 8px rgba(25,37,31,0.06)" },
+    "overlay": { "$value": "0 8px 32px rgba(25,37,31,0.18)" }
+  }
+}
