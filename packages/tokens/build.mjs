@@ -62,8 +62,15 @@ ${colorVars('dark')}
 }
 
 html,
-body,
-#root {
+body {
+  min-height: 100%;
+}
+
+/* 앱 루트(#root)와 Storybook 루트는 세로 flex 열이다: 틀이 남는 높이를 채워 고정 막대가 화면 아래에 붙는다. */
+#root,
+#storybook-root {
+  display: flex;
+  flex-direction: column;
   min-height: 100%;
 }
 
