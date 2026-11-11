@@ -61,6 +61,17 @@ ${colorVars('dark')}
   color-scheme: dark;
 }
 
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+html,
+body {
+  height: 100%;
+}
+
 *,
 *::before,
 *::after {
