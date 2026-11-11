@@ -1,0 +1,14 @@
+{
+  "name": "@hey/tokens",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./dist/tokens.ts",
+    "./tokens.css": "./dist/tokens.css"
+  },
+  "scripts": {
+    "build": "node build.mjs",
+    "test": "node --test scripts/"
+  }
+}
