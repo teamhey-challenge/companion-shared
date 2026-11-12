@@ -3,8 +3,7 @@ package ai.hey.protocol
 
 /** Protocol handshake constants. Same major as the relay is required; minor/patch may differ. */
 object ProtocolVersion {
-    const val CURRENT = "1.0.0"
-    const val MAJOR = 1
+    const val CURRENT = "2.0.0"
+    const val MAJOR = 2
     const val HEADER = "X-Hey-Protocol"
-    const val QUERY = "v"
 }
