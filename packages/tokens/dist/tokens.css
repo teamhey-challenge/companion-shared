@@ -78,8 +78,9 @@
   --hey-color-bg-sunken: #ebeae2;
   --hey-color-bg-inverse: #19251f;
   --hey-color-fg-default: #202820;
-  --hey-color-fg-muted: #5a6256;
-  --hey-color-fg-subtle: #626a5e;
+  --hey-color-fg-muted: #454d41;
+  --hey-color-fg-subtle: #586053;
+  --hey-color-fg-disabled: #9aa195;
   --hey-color-fg-inverse: #f4f3ed;
   --hey-color-fg-on-accent: #19251f;
   --hey-color-fg-on-primary: #f4f3ed;
@@ -112,6 +113,7 @@
   --hey-color-fg-default: #eef0e6;
   --hey-color-fg-muted: #b5bbad;
   --hey-color-fg-subtle: #99a08e;
+  --hey-color-fg-disabled: #7a8272;
   --hey-color-fg-inverse: #19251f;
   --hey-color-fg-on-accent: #19251f;
   --hey-color-fg-on-primary: #19251f;
