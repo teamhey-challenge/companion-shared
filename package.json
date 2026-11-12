@@ -5,7 +5,8 @@
   "workspaces": ["packages/*"],
   "scripts": {
     "tokens": "bun run --cwd packages/tokens build",
-    "check:tokens": "bun run tokens && git diff --exit-code -- packages/tokens/dist android/src",
+    "protocol": "bun packages/protocol/scripts/build-kotlin.mjs",
+    "check:tokens": "bun run tokens && bun run protocol && git diff --exit-code -- packages/tokens/dist android/src",
     "typecheck": "bun run --filter '*' typecheck",
     "test": "bun run --filter '*' test",
     "check": "bun run test && bun run typecheck && bun run check:tokens"
