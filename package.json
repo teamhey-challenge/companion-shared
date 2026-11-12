@@ -6,7 +6,7 @@
   "scripts": {
     "tokens": "bun run --cwd packages/tokens build",
     "protocol": "bun packages/protocol/scripts/build-kotlin.mjs",
-    "check:tokens": "bun run tokens && bun run protocol && git diff --exit-code -- packages/tokens/dist android/src",
+    "check:tokens": "bun run tokens && bun run protocol && git diff --exit-code -- packages/tokens/dist packages/protocol/fixtures android/src",
     "typecheck": "bun run --filter '*' typecheck",
     "test": "bun run --filter '*' test",
     "check": "bun run test && bun run typecheck && bun run check:tokens"

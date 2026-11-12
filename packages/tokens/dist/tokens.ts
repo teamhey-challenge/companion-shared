@@ -83,7 +83,7 @@ export const tokens = {
     "strong": 2,
     "focus": 3
   },
-  "fontFamily": "Pretendard, \"Hiragino Sans\", \"Noto Sans JP\", \"PingFang SC\", \"Noto Sans SC\", system-ui, sans-serif",
+  "fontFamily": "Pretendard, \"Hiragino Sans\", \"Noto Sans JP\", \"PingFang SC\", \"Noto Sans SC\", \"Noto Sans Thai\", \"Thonburi\", \"Leelawadee UI\", system-ui, sans-serif",
   "type": {
     "web": {
       "display": {

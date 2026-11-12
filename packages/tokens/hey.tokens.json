@@ -86,7 +86,7 @@
   },
   "font": {
     "family": { "$value": "Pretendard" },
-    "family-fallback": { "$value": "\"Hiragino Sans\", \"Noto Sans JP\", \"PingFang SC\", \"Noto Sans SC\", system-ui, sans-serif" }
+    "family-fallback": { "$value": "\"Hiragino Sans\", \"Noto Sans JP\", \"PingFang SC\", \"Noto Sans SC\", \"Noto Sans Thai\", \"Thonburi\", \"Leelawadee UI\", system-ui, sans-serif" }
   },
   "type": {
     "$description": "size/lineHeight in px (web) or dp/sp (car). weight is numeric. tracking in em.",
