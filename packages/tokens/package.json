@@ -1,5 +1,5 @@
 {
-  "name": "@hey/tokens",
+  "name": "@darren-pleos-challenge/hey-tokens",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -9,6 +9,6 @@
   },
   "scripts": {
     "build": "node build.mjs",
-    "test": "node --test scripts/"
+    "test": "node --test scripts/check-css.test.mjs"
   }
 }

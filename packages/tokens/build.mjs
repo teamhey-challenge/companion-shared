@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const src = JSON.parse(readFileSync(join(here, 'hey.tokens.json'), 'utf8'));
-const ktPath = join(here, '../../apps/car-android/core/designsystem/src/main/kotlin/ai/hey/designsystem/token/HeyTokens.kt');
+const ktPath = join(here, '../../android/src/main/kotlin/ai/hey/designsystem/token/HeyTokens.kt');
 
 const camel = (s) => s.replace(/-([a-z0-9])/g, (_, c) => c.toUpperCase());
 const entries = (o) => Object.entries(o).filter(([k]) => !k.startsWith('$'));
