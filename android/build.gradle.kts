@@ -5,7 +5,7 @@ plugins {
 
 // Included build: consumers use `includeBuild("shared/android")` and depend on "ai.hey:tokens-compose".
 group = "ai.hey"
-version = "0.4.0"
+version = "0.7.2"
 
 android {
     namespace = "ai.hey.tokens"

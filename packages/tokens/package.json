@@ -1,6 +1,6 @@
 {
   "name": "@darren-pleos-challenge/hey-tokens",
-  "version": "0.4.0",
+  "version": "0.7.2",
   "private": true,
   "type": "module",
   "exports": {
