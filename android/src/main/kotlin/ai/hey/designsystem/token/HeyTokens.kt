@@ -10,14 +10,15 @@ object HeyTokens {
   object Space {
     val s4 = 4.dp
     val s8 = 8.dp
+    val s12 = 12.dp
     val s16 = 16.dp
     val s24 = 24.dp
     val s32 = 32.dp
   }
   object Radius {
     val sm = 8.dp
-    val md = 12.dp
-    val lg = 16.dp
+    val md = 16.dp
+    val lg = 24.dp
     val xl = 24.dp
     val full = 999.dp
   }
@@ -27,12 +28,18 @@ object HeyTokens {
     val focus = 3.dp
   }
   object Size {
-    val touchWeb = 44.dp
+    val touchWeb = 48.dp
     val touchCar = 76.dp
     val touchCarPrimary = 96.dp
     val iconWeb = 24.dp
-    val iconCar = 40.dp
+    val iconCar = 24.dp
     val contentMaxWeb = 480.dp
+    val carPageX = 80.dp
+    val carPageY = 40.dp
+    val brandHeight = 40.dp
+    val carConditionIcon = 32.dp
+    val webPageMin = 20.dp
+    val webPageMax = 24.dp
   }
   object Sheet {
     val radius = 24.dp
@@ -49,12 +56,14 @@ object HeyTokens {
     val easingExit = floatArrayOf(0.3f, 0f, 1f, 1f)
   }
   object CarType {
-    val hero = HeyTypeSpec(72.sp, 88.sp, 700, -0.02f)
-    val title = HeyTypeSpec(44.sp, 56.sp, 700, -0.01f)
-    val heading = HeyTypeSpec(36.sp, 48.sp, 650, 0f)
-    val body = HeyTypeSpec(32.sp, 44.sp, 500, 0f)
-    val label = HeyTypeSpec(28.sp, 36.sp, 650, 0f)
-    val caption = HeyTypeSpec(24.sp, 32.sp, 500, 0f)
+    val hero = HeyTypeSpec(72.sp, 84.sp, 700, 0f)
+    val title = HeyTypeSpec(44.sp, 56.sp, 700, 0f)
+    val heading = HeyTypeSpec(32.sp, 48.sp, 700, 0f)
+    val body = HeyTypeSpec(24.sp, 32.sp, 700, 0f)
+    val label = HeyTypeSpec(24.sp, 32.sp, 700, 0f)
+    val caption = HeyTypeSpec(24.sp, 32.sp, 700, 0f)
+    val metric = HeyTypeSpec(96.sp, 116.sp, 700, 0f)
+    val badge = HeyTypeSpec(20.sp, 24.sp, 700, 0f)
   }
 }
 
@@ -90,68 +99,113 @@ data class HeyColors(
     val info: Color,
     val infoContainer: Color,
     val scrim: Color,
+    val buttonSecondary: Color,
+    val buttonSecondaryPressed: Color,
+    val fgOnSecondary: Color,
+    val fgOnDanger: Color,
+    val brandGreen: Color,
+    val welcomeScrim: Color,
+    val surfaceContainer: Color,
+    val surfaceContainerHigh: Color,
+    val secondaryContainer: Color,
+    val onSecondaryContainer: Color,
+    val scenePeach: Color,
+    val sceneLilac: Color,
+    val sceneSky: Color,
+    val sceneSand: Color,
+    val sceneInk: Color,
 )
 
 val HeyLightColors = HeyColors(
-    bgPage = Color(0xFFF4F3ED),
-    bgSurface = Color(0xFFFBFAF5),
-    bgRaised = Color(0xFFFFFEFA),
-    bgSunken = Color(0xFFEBEAE2),
-    bgInverse = Color(0xFF19251F),
-    fgDefault = Color(0xFF202820),
-    fgMuted = Color(0xFF454D41),
-    fgSubtle = Color(0xFF586053),
-    fgDisabled = Color(0xFF9AA195),
-    fgInverse = Color(0xFFF4F3ED),
-    fgOnAccent = Color(0xFF19251F),
-    fgOnPrimary = Color(0xFFF4F3ED),
-    borderDefault = Color(0xFFDCDED3),
-    borderStrong = Color(0xFFB6BBAD),
-    accent = Color(0xFFD2F264),
-    accentPressed = Color(0xFFBCDC4C),
-    accentContainer = Color(0xFFEEF8C8),
-    primary = Color(0xFF344C37),
-    primaryPressed = Color(0xFF26392A),
-    focusRing = Color(0xFF4F6D0C),
-    success = Color(0xFF2C7443),
-    successContainer = Color(0xFFDCEFE0),
-    warning = Color(0xFF8A5A00),
-    warningContainer = Color(0xFFF8E9C6),
-    danger = Color(0xFFB3261E),
-    dangerContainer = Color(0xFFF9DEDB),
-    info = Color(0xFF2C5B84),
-    infoContainer = Color(0xFFDDE8F2),
+    bgPage = Color(0xFFF0F8FB),
+    bgSurface = Color(0xFFF8FCFE),
+    bgRaised = Color(0xFFFFFFFF),
+    bgSunken = Color(0xFFDFEDF3),
+    bgInverse = Color(0xFF203847),
+    fgDefault = Color(0xFF243F50),
+    fgMuted = Color(0xFF456070),
+    fgSubtle = Color(0xFF526D7C),
+    fgDisabled = Color(0xFF879EA9),
+    fgInverse = Color(0xFFF5FBFE),
+    fgOnAccent = Color(0xFF203E50),
+    fgOnPrimary = Color(0xFFF5FBFE),
+    borderDefault = Color(0xFFCBDFE8),
+    borderStrong = Color(0xFF87AABF),
+    accent = Color(0xFFA9D7EC),
+    accentPressed = Color(0xFF8BC4E0),
+    accentContainer = Color(0xFFD8EDF7),
+    primary = Color(0xFF244E67),
+    primaryPressed = Color(0xFF31637D),
+    focusRing = Color(0xFF326B92),
+    success = Color(0xFF466C5B),
+    successContainer = Color(0xFFE0EADF),
+    warning = Color(0xFF825B19),
+    warningContainer = Color(0xFFF8E9B9),
+    danger = Color(0xFFAA3B43),
+    dangerContainer = Color(0xFFF6DDE0),
+    info = Color(0xFF35617F),
+    infoContainer = Color(0xFFDCEEF8),
     scrim = Color(0x52000000),
+    buttonSecondary = Color(0xFFD9E8F6),
+    buttonSecondaryPressed = Color(0xFFC5DCED),
+    fgOnSecondary = Color(0xFF243F50),
+    fgOnDanger = Color(0xFFFFFFFF),
+    brandGreen = Color(0xFF8BCACA),
+    welcomeScrim = Color(0x8C000000),
+    surfaceContainer = Color(0xFFE4F1F7),
+    surfaceContainerHigh = Color(0xFFD7E8F0),
+    secondaryContainer = Color(0xFFDDE9F6),
+    onSecondaryContainer = Color(0xFF344F6B),
+    scenePeach = Color(0xFFB8DFEC),
+    sceneLilac = Color(0xFFD1DFF2),
+    sceneSky = Color(0xFFC9E9EE),
+    sceneSand = Color(0xFFDCEEF5),
+    sceneInk = Color(0xFF243F50),
 )
 
 val HeyDarkColors = HeyColors(
-    bgPage = Color(0xFF111A15),
-    bgSurface = Color(0xFF19251F),
-    bgRaised = Color(0xFF22302A),
-    bgSunken = Color(0xFF0B110E),
-    bgInverse = Color(0xFFF4F3ED),
-    fgDefault = Color(0xFFEEF0E6),
-    fgMuted = Color(0xFFB5BBAD),
-    fgSubtle = Color(0xFF99A08E),
-    fgDisabled = Color(0xFF7A8272),
-    fgInverse = Color(0xFF19251F),
-    fgOnAccent = Color(0xFF19251F),
-    fgOnPrimary = Color(0xFF19251F),
-    borderDefault = Color(0xFF2D3B33),
-    borderStrong = Color(0xFF46564C),
-    accent = Color(0xFFD2F264),
-    accentPressed = Color(0xFFBCDC4C),
-    accentContainer = Color(0xFF34421A),
-    primary = Color(0xFFD2F264),
-    primaryPressed = Color(0xFFBCDC4C),
-    focusRing = Color(0xFFE3FF86),
-    success = Color(0xFF7FD497),
-    successContainer = Color(0xFF1D3B27),
-    warning = Color(0xFFF2C25C),
-    warningContainer = Color(0xFF45360F),
-    danger = Color(0xFFFF8A80),
-    dangerContainer = Color(0xFF4A1D1A),
-    info = Color(0xFF8FC1EC),
-    infoContainer = Color(0xFF1B3247),
-    scrim = Color(0x52000000),
+    bgPage = Color(0xFF081923),
+    bgSurface = Color(0xFF0F2733),
+    bgRaised = Color(0xFF173745),
+    bgSunken = Color(0xFF06131C),
+    bgInverse = Color(0xFFEAF6FB),
+    fgDefault = Color(0xFFE0F2F7),
+    fgMuted = Color(0xFFA8C6D2),
+    fgSubtle = Color(0xFF9AB9C7),
+    fgDisabled = Color(0xFF63828F),
+    fgInverse = Color(0xFF153341),
+    fgOnAccent = Color(0xFF082D39),
+    fgOnPrimary = Color(0xFF082D39),
+    borderDefault = Color(0xFF294854),
+    borderStrong = Color(0xFF527985),
+    accent = Color(0xFF8CD7DF),
+    accentPressed = Color(0xFF6BBCC9),
+    accentContainer = Color(0xFF1A414E),
+    primary = Color(0xFFA2D9ED),
+    primaryPressed = Color(0xFF83BFD8),
+    focusRing = Color(0xFF91DBE8),
+    success = Color(0xFFB4D7BF),
+    successContainer = Color(0xFF34483C),
+    warning = Color(0xFFEFCF87),
+    warningContainer = Color(0xFF4C402C),
+    danger = Color(0xFFFFB9BC),
+    dangerContainer = Color(0xFF503039),
+    info = Color(0xFFA2D3ED),
+    infoContainer = Color(0xFF153446),
+    scrim = Color(0xB8020B13),
+    buttonSecondary = Color(0xFF1A354B),
+    buttonSecondaryPressed = Color(0xFF254A62),
+    fgOnSecondary = Color(0xFFE0F2F7),
+    fgOnDanger = Color(0xFF202820),
+    brandGreen = Color(0xFF86CFC8),
+    welcomeScrim = Color(0x8C000000),
+    surfaceContainer = Color(0xFF102D3B),
+    surfaceContainerHigh = Color(0xFF193B4C),
+    secondaryContainer = Color(0xFF1B3048),
+    onSecondaryContainer = Color(0xFFD1E6F5),
+    scenePeach = Color(0xFF123F48),
+    sceneLilac = Color(0xFF202E49),
+    sceneSky = Color(0xFF123747),
+    sceneSand = Color(0xFF172D3E),
+    sceneInk = Color(0xFFE0F2F7),
 )
