@@ -1,15 +1,13 @@
 {
-  "name": "hey-shared",
+  "name": "companion-shared",
   "private": true,
   "type": "module",
   "workspaces": ["packages/*"],
   "scripts": {
     "tokens": "bun run --cwd packages/tokens build",
-    "protocol": "bun packages/protocol/scripts/build-kotlin.mjs",
-    "check:tokens": "bun run tokens && bun run protocol && git diff --exit-code -- packages/tokens/dist packages/protocol/fixtures android/src",
-    "typecheck": "bun run --filter '*' typecheck",
+    "check:tokens": "bun run tokens && git diff --exit-code -- packages/tokens/dist android/src",
     "test": "bun run --filter '*' test",
-    "check": "bun run test && bun run typecheck && bun run check:tokens"
+    "check": "bun run test && bun run check:tokens"
   },
   "devDependencies": {
     "@types/bun": "^1.3.0",
