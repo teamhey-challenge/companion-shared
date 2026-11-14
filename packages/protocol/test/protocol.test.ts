@@ -1,5 +1,13 @@
 import { expect, test } from "bun:test";
-import { isCoordKey, parseClientFrame, parseServerFrame, sanitizeCtx } from "../src/index";
+import { PAIR_CODE_ALPHABET, PAIR_CODE_RE, isCoordKey, parseClientFrame, parseServerFrame, sanitizeCtx } from "../src/index";
+
+test("v0.4.0 settings frame and pair-code alphabet", () => {
+  const s = { proactive: "normal", memoryEnabled: true, speech: "banmal", nickname: null };
+  expect(parseServerFrame({ type: "settings", settings: s }).ok).toBe(true);
+  expect(parseServerFrame({ type: "settings", settings: { ...s, proactive: "x" } }).ok).toBe(false);
+  expect(/[01OIL]/.test(PAIR_CODE_ALPHABET)).toBe(false);
+  expect(PAIR_CODE_RE.test("ABCDEFGH")).toBe(true);
+});
 
 test("client frames validate", () => {
   expect(parseClientFrame('{"type":"hello","v":1,"appVersion":"1.0"}').ok).toBe(true);

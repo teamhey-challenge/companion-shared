@@ -34,7 +34,8 @@ export interface ReplyDelta { type: "reply.delta"; turnId: string; text: string 
 export interface ReplyEnd { type: "reply.end"; turnId: string; text: string; firstTokenMs: number | null; totalMs: number }
 export interface Proactive { type: "proactive"; id: string; reason: string }
 export interface ErrorFrame { type: "error"; code: ErrorCode; turnId?: string; message?: string }
-export type ServerFrame = ReplyStart | ReplyDelta | ReplyEnd | Proactive | ErrorFrame;
+export interface SettingsFrame { type: "settings"; settings: Settings }
+export type ServerFrame = ReplyStart | ReplyDelta | ReplyEnd | Proactive | SettingsFrame | ErrorFrame;
 
 export const ERROR_CODES = [
   "bad_json", "bad_frame", "hello_required", "text_too_long", "turn_unknown",
@@ -47,6 +48,46 @@ export interface RegisterRequest { installId: string }
 export interface RegisterResponse { carToken: string }
 export interface SessionResponse { sessionId: string; wsTicket: string; expiresInSec: number }
 export const PROVISION_HEADER = "X-Provision-Secret";
+
+// ---- REST (contract.md, 공개 주소의 /api 뒤) ----
+export const CONSENT_TYPES = ["terms", "privacy", "record", "memory", "external_ai"] as const;
+export type ConsentType = (typeof CONSENT_TYPES)[number];
+export type ConsentChannel = "car" | "phone";
+export interface ConsentRequest { type: ConsentType; version: string; granted: boolean; channel: ConsentChannel }
+export interface ConsentRecord { type: ConsentType; version: string; granted: boolean; at: string }
+export interface ConsentsResponse { consents: ConsentRecord[] }
+
+export const PAIR_CODE_ALPHABET = "ABCDEFGHJKMNPQRSTUVWXYZ23456789";
+export const PAIR_CODE_LENGTH = 8;
+export const PAIR_CODE_TTL_SEC = 300;
+export const PAIR_CODE_RE = /^[ABCDEFGHJKMNPQRSTUVWXYZ23456789]{8}$/;
+export type PairingStatus = "none" | "pending" | "claimed" | "expired";
+export type PublicPairingStatus = "pending" | "claimed" | "expired" | "unknown";
+export interface CharacterInfo { name: string; bodyColor: 0 | 1 }
+export interface CreatePairingResponse { pairCode: string; expiresAt: string }
+export interface CurrentPairingResponse { status: PairingStatus; pairCode?: string; expiresAt?: string; pairedAt?: string }
+export interface PublicPairingResponse { status: PublicPairingStatus; character: CharacterInfo }
+export interface ClaimRequest { record: boolean; memory: boolean }
+export interface ClaimResponse { phoneToken: string; character: CharacterInfo }
+
+export type MemoryKind = "fact" | "summary";
+export interface MemoryItem { id: string; kind: MemoryKind; text: string; createdAt: string }
+export interface MemoryListResponse { items: MemoryItem[]; nextCursor: string | null }
+
+export const PROACTIVE_LEVELS = ["off", "low", "normal", "high"] as const;
+export type ProactiveLevel = (typeof PROACTIVE_LEVELS)[number];
+export const SPEECH_STYLES = ["banmal", "jondaetmal"] as const;
+export type SpeechStyle = (typeof SPEECH_STYLES)[number];
+/** 먼저 말 걸기 최소 간격(분). */
+export const PROACTIVE_INTERVAL_MIN: Record<Exclude<ProactiveLevel, "off">, number> = { low: 20, normal: 10, high: 5 };
+export interface Settings { proactive: ProactiveLevel; memoryEnabled: boolean; speech: SpeechStyle; nickname: string | null }
+export type SettingsPatch = Partial<Settings>;
+/** 폰 토큰이 바꿀 수 있는 키. */
+export const PHONE_SETTINGS_KEYS = ["speech"] as const;
+export const MAX_NICKNAME_CHARS = 20;
+
+export interface VehicleEvent { at: string; ctx: Ctx }
+export type VehicleEventsRequest = VehicleEvent[];
 
 /** 좌표로 보이는 키. ctx에서 조용히 버린다(대소문자 무시, 접두·접미 포함). */
 const COORD_KEY = /(^|[_\-.])(lat|lng|lon|long|latitude|longitude|location|loc|gps|position|pos|coords?|coordinates?|geo|geolocation)([_\-.]|$)|^(lat|lon|lng)(itude)?\d*$|latitude|longitude|gps|location|geo/i;
@@ -110,6 +151,11 @@ export function parseClientFrame(raw: unknown): Parsed<ClientFrame> {
   }
 }
 
+export function isSettings(v: Record<string, unknown>): boolean {
+  return (PROACTIVE_LEVELS as readonly unknown[]).includes(v.proactive) && typeof v.memoryEnabled === "boolean" &&
+    (SPEECH_STYLES as readonly unknown[]).includes(v.speech) && (v.nickname === null || typeof v.nickname === "string");
+}
+
 /** 서버→앱 텍스트 프레임 검증(클라이언트·시험용). */
 export function parseServerFrame(raw: unknown): Parsed<ServerFrame> {
   let m: unknown = raw;
@@ -136,6 +182,9 @@ export function parseServerFrame(raw: unknown): Parsed<ServerFrame> {
     case "proactive":
       if (typeof m.id !== "string" || typeof m.reason !== "string") return bad();
       return { ok: true, value: m as unknown as Proactive };
+    case "settings":
+      if (!isObj(m.settings) || !isSettings(m.settings)) return bad();
+      return { ok: true, value: m as unknown as SettingsFrame };
     case "error":
       if (typeof m.code !== "string" || !(ERROR_CODES as readonly string[]).includes(m.code)) return bad();
       return { ok: true, value: m as unknown as ErrorFrame };
