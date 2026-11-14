@@ -35,7 +35,9 @@ export interface ReplyEnd { type: "reply.end"; turnId: string; text: string; fir
 export interface Proactive { type: "proactive"; id: string; reason: string }
 export interface ErrorFrame { type: "error"; code: ErrorCode; turnId?: string; message?: string }
 export interface SettingsFrame { type: "settings"; settings: Settings }
-export type ServerFrame = ReplyStart | ReplyDelta | ReplyEnd | Proactive | SettingsFrame | ErrorFrame;
+/** 연결 상태가 바뀌었다(폰·차가 연결을 해제하면 status "none"). 차 앱은 폴링을 기다리지 않고 C7·C2를 바로 갱신한다. */
+export interface PairingFrame { type: "pairing"; status: PairingStatus }
+export type ServerFrame = ReplyStart | ReplyDelta | ReplyEnd | Proactive | SettingsFrame | PairingFrame | ErrorFrame;
 
 export const ERROR_CODES = [
   "bad_json", "bad_frame", "hello_required", "text_too_long", "turn_unknown",
@@ -185,6 +187,9 @@ export function parseServerFrame(raw: unknown): Parsed<ServerFrame> {
     case "settings":
       if (!isObj(m.settings) || !isSettings(m.settings)) return bad();
       return { ok: true, value: m as unknown as SettingsFrame };
+    case "pairing":
+      if (!(["none", "pending", "claimed", "expired"] as readonly unknown[]).includes(m.status)) return bad();
+      return { ok: true, value: m as unknown as PairingFrame };
     case "error":
       if (typeof m.code !== "string" || !(ERROR_CODES as readonly string[]).includes(m.code)) return bad();
       return { ok: true, value: m as unknown as ErrorFrame };
