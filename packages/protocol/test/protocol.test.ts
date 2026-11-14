@@ -32,5 +32,6 @@ test("server frames validate", () => {
   expect(parseServerFrame({ type: "reply.start", turnId: "t", audio: { format: "pcm_s16le", sampleRate: 24000, channels: 1 } }).ok).toBe(true);
   expect(parseServerFrame({ type: "reply.start", turnId: "t", audio: "mp3" }).ok).toBe(false);
   expect(parseServerFrame({ type: "error", code: "rate_limited" }).ok).toBe(true);
+  expect(parseServerFrame({ type: "error", code: "consent_required", turnId: "t" }).ok).toBe(true);
   expect(parseServerFrame({ type: "error", code: "weird" }).ok).toBe(false);
 });

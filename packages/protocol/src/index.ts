@@ -39,7 +39,7 @@ export type ServerFrame = ReplyStart | ReplyDelta | ReplyEnd | Proactive | Setti
 
 export const ERROR_CODES = [
   "bad_json", "bad_frame", "hello_required", "text_too_long", "turn_unknown",
-  "rate_limited", "no_key", "llm_failed", "binary_not_accepted",
+  "rate_limited", "no_key", "llm_failed", "binary_not_accepted", "consent_required",
 ] as const;
 export type ErrorCode = (typeof ERROR_CODES)[number];
 
