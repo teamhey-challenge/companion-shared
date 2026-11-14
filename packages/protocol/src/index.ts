@@ -11,6 +11,12 @@ export const MAX_ID_CHARS = 64;
 export type Trigger = "ptt" | "listen_after_proactive";
 export type CtxValue = string | number | boolean | null;
 export type Ctx = Record<string, CtxValue>;
+/**
+ * ctx key: remaining distance to the navigation destination, whole km. The car sends it only while the navigation has a
+ * destination and leaves the key out otherwise. Neither name nor coordinates of the destination are sent (scenario 2:
+ * it is only compared with the remaining range).
+ */
+export const CTX_DEST_KM = "destKm";
 
 export interface AudioFormat {
   format: "pcm_s16le";
