@@ -9,6 +9,13 @@ test("v0.4.0 settings frame and pair-code alphabet", () => {
   expect(PAIR_CODE_RE.test("ABCDEFGH")).toBe(true);
 });
 
+test("v0.4.2 pairing frame", () => {
+  expect(parseServerFrame({ type: "pairing", status: "none" }).ok).toBe(true);
+  expect(parseServerFrame({ type: "pairing", status: "claimed" }).ok).toBe(true);
+  expect(parseServerFrame({ type: "pairing", status: "gone" }).ok).toBe(false);
+  expect(parseServerFrame({ type: "pairing" }).ok).toBe(false);
+});
+
 test("client frames validate", () => {
   expect(parseClientFrame('{"type":"hello","v":1,"appVersion":"1.0"}').ok).toBe(true);
   expect(parseClientFrame({ type: "turn.start", turnId: "t1", trigger: "ptt" }).ok).toBe(true);
