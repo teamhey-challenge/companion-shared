@@ -8,7 +8,7 @@ function luminance(hex) {
     .reduce((sum, v, i) => sum + v * [.2126, .7152, .0722][i], 0);
 }
 for (const [theme, tokens] of Object.entries(color)) test(`${theme}: enabled text and action semantic pairs meet 4.5:1`, () => {
-  const pairs = ['fg-default', 'fg-muted', 'fg-subtle'].flatMap(fg => ['bg-page', 'bg-surface', 'bg-raised'].map(bg => [fg, bg]));
+  const pairs = ['fg-default', 'fg-muted', 'fg-subtle'].flatMap(fg => ['bg-page', 'bg-surface', 'bg-raised', 'accent-container', 'danger-container', 'success-container', 'warning-container', 'info-container', 'button-secondary'].map(bg => [fg, bg]));
   pairs.push(['fg-inverse', 'bg-inverse'], ['fg-on-accent', 'accent'], ['fg-on-accent', 'accent-pressed'], ['fg-on-primary', 'primary'], ['fg-on-primary', 'primary-pressed'], ['fg-on-secondary', 'button-secondary'], ['fg-on-secondary', 'button-secondary-pressed'], ['fg-on-danger', 'danger']);
   for (const state of ['success', 'warning', 'danger', 'info']) pairs.push([state, `${state}-container`]);
   for (const [fg, bg] of pairs) {

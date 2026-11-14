@@ -9,7 +9,7 @@ export const tokens = {
       "bgInverse": "#203847",
       "fgDefault": "#243f50",
       "fgMuted": "#456070",
-      "fgSubtle": "#526d7c",
+      "fgSubtle": "#49626f",
       "fgDisabled": "#879ea9",
       "fgInverse": "#f5fbfe",
       "fgOnAccent": "#203e50",

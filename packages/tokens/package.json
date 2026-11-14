@@ -9,6 +9,6 @@
   },
   "scripts": {
     "build": "node build.mjs",
-    "test": "node --test scripts/check-css.test.mjs"
+    "test": "node --test scripts/check-css.test.mjs scripts/contrast.test.mjs"
   }
 }
