@@ -43,6 +43,16 @@ cd android && nice -n 19 ./gradlew --max-workers=2 :assembleRelease
 
 테마 토큰 대비는 `packages/tokens/scripts/contrast.test.mjs`가 시험한다.
 
+## 링크
+
+| 저장소 | 내용 |
+|---|---|
+| [companion-car](https://github.com/darren-pleos-challenge/companion-car) | 차량 앱 |
+| [companion-phone](https://github.com/darren-pleos-challenge/companion-phone) | 폰 앱(QR 연결·동의·기억 관리) |
+| [companion-server](https://github.com/darren-pleos-challenge/companion-server) | 대화·기억·TTS 서버 |
+| [companion-web](https://github.com/darren-pleos-challenge/companion-web) | 폰 웹·디자인 시스템 Storybook |
+| [companion-shared](https://github.com/darren-pleos-challenge/companion-shared) | 디자인 토큰·프로토콜(이 저장소) |
+
 ## 라이선스
 
 코드는 MIT(`LICENSE`). 글꼴 Chiron GoRound TC는 SIL OFL 1.1이며 전문은 글꼴 옆 `*OFL*.txt`에 있다.
