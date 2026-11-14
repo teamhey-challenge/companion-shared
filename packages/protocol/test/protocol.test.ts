@@ -1,5 +1,5 @@
 import { expect, test } from "bun:test";
-import { PAIR_CODE_ALPHABET, PAIR_CODE_RE, isCoordKey, parseClientFrame, parseServerFrame, sanitizeCtx } from "../src/index";
+import { CTX_DEST_KM, PAIR_CODE_ALPHABET, PAIR_CODE_RE, isCoordKey, parseClientFrame, parseServerFrame, sanitizeCtx } from "../src/index";
 
 test("v0.4.0 settings frame and pair-code alphabet", () => {
   const s = { proactive: "normal", memoryEnabled: true, speech: "banmal", nickname: null };
@@ -41,4 +41,11 @@ test("server frames validate", () => {
   expect(parseServerFrame({ type: "error", code: "rate_limited" }).ok).toBe(true);
   expect(parseServerFrame({ type: "error", code: "consent_required", turnId: "t" }).ok).toBe(true);
   expect(parseServerFrame({ type: "error", code: "weird" }).ok).toBe(false);
+});
+
+test("v0.5.0 destKm ctx key (distance to the navigation destination) passes the ctx filter", () => {
+  expect(CTX_DEST_KM).toBe("destKm");
+  expect(isCoordKey(CTX_DEST_KM)).toBe(false);
+  const r = parseClientFrame({ type: "ctx", ctx: { gear: "P", rangeKm: 30, destKm: 42, latitude: 36.8 } });
+  expect(r).toEqual({ ok: true, value: { type: "ctx", ctx: { gear: "P", rangeKm: 30, destKm: 42 } } });
 });
