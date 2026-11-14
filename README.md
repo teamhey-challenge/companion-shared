@@ -42,3 +42,7 @@ cd android && nice -n 19 ./gradlew --max-workers=2 :assembleRelease
 ```
 
 테마 토큰 대비는 `packages/tokens/scripts/contrast.test.mjs`가 시험한다.
+
+## 라이선스
+
+코드는 MIT(`LICENSE`). 글꼴 Chiron GoRound TC는 SIL OFL 1.1이며 전문은 글꼴 옆 `*OFL*.txt`에 있다.
