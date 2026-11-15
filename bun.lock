@@ -10,24 +10,24 @@
       },
     },
     "packages/copy": {
-      "name": "@darren-pleos-challenge/hey-copy",
+      "name": "@teamhey/hey-copy",
       "version": "0.1.0",
     },
     "packages/protocol": {
-      "name": "@darren-pleos-challenge/hey-protocol",
+      "name": "@teamhey/hey-protocol",
       "version": "0.5.0",
     },
     "packages/tokens": {
-      "name": "@darren-pleos-challenge/hey-tokens",
+      "name": "@teamhey/hey-tokens",
       "version": "0.7.2",
     },
   },
   "packages": {
-    "@darren-pleos-challenge/hey-copy": ["@darren-pleos-challenge/hey-copy@workspace:packages/copy"],
+    "@teamhey/hey-copy": ["@teamhey/hey-copy@workspace:packages/copy"],
 
-    "@darren-pleos-challenge/hey-protocol": ["@darren-pleos-challenge/hey-protocol@workspace:packages/protocol"],
+    "@teamhey/hey-protocol": ["@teamhey/hey-protocol@workspace:packages/protocol"],
 
-    "@darren-pleos-challenge/hey-tokens": ["@darren-pleos-challenge/hey-tokens@workspace:packages/tokens"],
+    "@teamhey/hey-tokens": ["@teamhey/hey-tokens@workspace:packages/tokens"],
 
     "@types/bun": ["@types/bun@1.4.4", "", { "dependencies": { "bun-types": "1.4.4" } }, "sha512-9wkRDXUXK124pEnAutE6n/l18j+i9GC5IAHK8TmX/2nlySETmky0OU6yL5U8pW1AoKh++AN9auDCr647BfurjQ=="],
 
