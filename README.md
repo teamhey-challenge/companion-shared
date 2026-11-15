@@ -1,6 +1,17 @@
 # companion-shared
 
-차량 캐릭터 AI 컴패니언(앱 Hey, 캐릭터 헤이파리, 팀 Team Hey. 저장소 이름 `companion-*`은 그대로)의 공유 저장소다. 디자인 토큰 파이프라인과 Android Compose 토큰 라이브러리를 담는다. HEY 시절 `hey-shared`에서 `packages/tokens`·`android`만 기록째 떼어 왔다.
+앱 이름 **Hey**(캐릭터 헤이리), 팀 **Team Hey**. 저장소 이름 `companion-*`은 그대로다.
+
+차량 캐릭터 AI 컴패니언의 **공유 저장소**다. 디자인 토큰 파이프라인(웹 CSS·TS)과 Android Compose 토큰 라이브러리, 프로토콜 패키지를 담는다. 차량 앱·폰 앱·서버·폰 웹이 git 서브모듈 `shared/`로 쓴다.
+
+## 제출물과 주소
+
+- 이 저장소에는 APK가 없다. 차량 앱은 companion-car `apk/TeamHey_Hey_release.apk`(https://hey.lastmile.ltd/download/latest.apk), 폰 앱은 companion-phone `apk/TeamHey_Hey-phone_release.apk`(https://hey.lastmile.ltd/download/phone/latest.apk). 서버는 https://hey.lastmile.ltd/api.
+- 심사자 에뮬레이터의 차 등록에는 등록 비밀 파일이 필요하다. 팀이 요청 시 전달하며 방법은 companion-car README에 있다.
+
+## 테스트 환경
+
+Bun 1.4 이상(CI는 1.4.2), TypeScript 5.9. Android 라이브러리는 JDK 17과 Gradle 8.13(래퍼)로 빌드한다. Pleos SDK(Vehicle·NaviHelper·SpeechToText·TextToSpeech)는 쓰지 않는다. 차량 앱이 쓴다. 이 저장소는 사용자 데이터·좌표를 다루지 않는다. 차량 화면 규격(1600x900 dp, 멀티윈도우 1251/840/560 dp)은 companion-car README에 있다.
 
 ## 구성
 
@@ -28,7 +39,7 @@ git submodule add git@github.com:teamhey-challenge/companion-shared.git shared
 git -C shared checkout v0.1.0
 ```
 
-- JS: `"@darren-pleos-challenge/hey-tokens": "file:shared/packages/tokens"`
+- JS: `"hey-tokens": "file:shared/packages/tokens"` (패키지 이름은 `packages/tokens/package.json` 참고)
 - Android: `settings.gradle.kts`에 `includeBuild("shared/android")`
 
 ## 로컬 점검
