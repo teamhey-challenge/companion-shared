@@ -1,0 +1,56 @@
+# companion-shared pipeline. Gates and thresholds: pleos-challenge/docs/status/2026-11-16-gitlab/ci-gates.md
+# Pipelines run for MRs and main only. Merge requires a green pipeline (main is protected).
+workflow:
+  auto_cancel:
+    on_new_commit: interruptible
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+stages: [scan, check]
+
+variables:
+  GIT_STRATEGY: fetch
+  GIT_DEPTH: "0"                       # merge-base diff for the secrets scan needs history
+  BUN_INSTALL_CACHE_DIR: $CI_PROJECT_DIR/.bun-cache
+
+default:
+  image: oven/bun:1.4.2-debian@sha256:4f6e31d1a54d6a3dd312daef655fc998101b5043d52e12592ac293ef04b9bc73
+  tags: [pleos, docker, light, bun]
+  interruptible: true
+  timeout: 15m
+
+.bun-cache:
+  cache:
+    key: { files: [bun.lock] }
+    paths: [.bun-cache]
+    policy: pull-push
+
+# Secrets scan on lines this change adds (merge-base..HEAD), not on history already published. Blocking.
+secrets-scan:
+  stage: scan
+  image:
+    name: zricethezav/gitleaks:v8.21.2@sha256:0e99e8821643ea5b235718642b93bb32486af9c8162c8b8731f7cbdc951a7f46
+    entrypoint: [""]
+  script:
+    - |
+      base="${CI_MERGE_REQUEST_DIFF_BASE_SHA:-}"
+      if [ -z "$base" ] && [ -n "${CI_COMMIT_BEFORE_SHA:-}" ] && [ "$CI_COMMIT_BEFORE_SHA" != 0000000000000000000000000000000000000000 ]; then base="$CI_COMMIT_BEFORE_SHA"; fi
+      [ -n "$base" ] || base="$(git rev-parse HEAD~1)"
+      echo "scanning added lines in $base..HEAD"
+      git config --global --add safe.directory "$CI_PROJECT_DIR"
+      gitleaks git --log-opts="$base..HEAD" --no-banner --redact --verbose .
+
+# tests + generated-token drift (`git diff --exit-code` on dist/ and HeyTokens.kt) + studio token comparison.
+# compare-studio-tokens fetches hey-companion-ui over git; without access to it the script skips (exit 0) unless STUDIO_TOKENS_STRICT=1.
+# Needs real Node (`node --test` in packages/tokens), so this job uses the node image and installs the pinned bun.
+check:
+  stage: check
+  extends: .bun-cache
+  image: node:22-bookworm-slim@sha256:e9f565d32859f0cbfb52125eafe8be39390f24dac302dc3cdf566e8ba3ab21ee
+  before_script:
+    - apt-get update -qq && apt-get install -y -qq --no-install-recommends git ca-certificates >/dev/null
+    - npm install -g bun@1.4.2 --silent
+  script:
+    - bun install --frozen-lockfile
+    - bun run check
