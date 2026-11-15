@@ -1,79 +1,66 @@
 # companion-shared
 
-앱 이름 **Hey**(캐릭터 헤이리), 팀 **Team Hey**. 저장소 이름 `companion-*`은 그대로다.
+Hey 앱들이 함께 쓰는 디자인 토큰, 글꼴, 프로토콜 타입.
 
-차량 캐릭터 AI 컴패니언의 **공유 저장소**다. 디자인 토큰 파이프라인(웹 CSS·TS)과 Android Compose 토큰 라이브러리, 프로토콜 패키지를 담는다. 차량 앱·폰 앱·서버·폰 웹이 git 서브모듈 `shared/`로 쓴다.
-
-## 제출물과 주소
-
-- 이 저장소에는 APK가 없다. 차량 앱은 companion-car `apk/TeamHey_Hey_release.apk`(https://hey.lastmile.ltd/download/latest.apk), 폰 앱은 companion-phone `apk/TeamHey_Hey-phone_release.apk`(https://hey.lastmile.ltd/download/phone/latest.apk). 서버는 https://hey.lastmile.ltd/api.
-
-## 테스트 환경
-
-Bun 1.4 이상(CI는 1.4.2), TypeScript 5.9. Android 라이브러리는 JDK 17과 Gradle 8.13(래퍼)로 빌드한다. Pleos SDK(Vehicle·NaviHelper·SpeechToText·TextToSpeech)는 쓰지 않는다. 차량 앱이 쓴다. 이 저장소는 사용자 데이터·좌표를 다루지 않는다. 차량 화면 규격(1600x900 dp, 멀티윈도우 1251/840/560 dp)은 companion-car README에 있다.
+토큰 한 파일(`hey.tokens.json`)에서 웹 CSS·TypeScript 값·Android Compose 코드(`HeyTokens.kt`)를 생성하므로, 차 앱·폰 앱·웹이 같은 색·크기·글꼴을 쓴다. 레지스트리에 게시하지 않고 소비 저장소가 git 서브모듈로 가져간다.
 
 ## 구성
 
 | 위치 | 내용 |
 |---|---|
-| `packages/tokens` | 디자인 토큰 정본 `hey.tokens.json`, 생성기 `build.mjs`, 생성물 `dist/tokens.{css,ts}`, CSS 리터럴 검사 |
-| `packages/protocol` | 빈 패키지. 컴패니언 메시지·프로토콜 타입을 새로 쓴다 |
-| `packages/copy` | 빈 패키지. 컴패니언 문구 카탈로그를 새로 쓴다 |
-| `android/` | Gradle 라이브러리 `ai.hey:tokens-compose` (`HeyTokens.kt`, 차량 앱이 아직 쓰는 `ProtocolVersion.kt`) |
+| `packages/tokens` | 토큰 정본 `hey.tokens.json`, 생성기 `build.mjs`, 생성물 `dist/tokens.{css,ts}`, 글꼴 `fonts/`, CSS 리터럴·색 대비 시험 |
+| `packages/protocol` | 차↔서버 WebSocket 메시지의 TypeScript 타입과 런타임 검증기(`parseClientFrame`/`parseServerFrame`) |
+| `packages/copy` | 문구 카탈로그 자리(현재 비어 있음) |
+| `android/` | Gradle 라이브러리 `ai.hey:tokens-compose`(`HeyTokens.kt`, 프로토콜 버전 상수, 가변 글꼴) |
 
-패키지·Kotlin 이름(`hey-*`, `ai.hey.*`)은 앱 이름이 확정될 때까지 바꾸지 않는다.
+테마는 라이트 '바다', 다크 '심해' 두 가지다.
 
-## 글꼴과 라이선스
+## 글꼴
 
-글꼴은 Chiron GoRound TC(SIL OFL 1.1)다. 웹은 `packages/tokens/fonts/ChironGoRoundTC-KoreanLatin.woff2`(가변 wght 200–900), 안드로이드는 같은 글꼴의 가변 TTF 하나(`android/src/main/res/font/chiron_goround_tc_variable.ttf`, wght 200–900, 한글 11,172자 전체)를 쓴다. 앱은 `Font(R.font.chiron_goround_tc_variable, variationSettings = FontVariation.Settings(FontVariation.weight(w)))`로 굵기마다 한 항목씩 만든다(minSdk 26 이상). 라이선스 전문은 `packages/tokens/fonts/ChironGoRoundTC-OFL.txt`와 `android/OFL-ChironGoRoundTC.txt`에 글꼴 옆으로 함께 배포한다. 소비 앱은 앱 안(설정의 오픈소스 고지 등)에도 이 고지를 포함해야 한다. 테마는 라이트 '바다', 다크 '심해'이며 라이트 `bg-page`는 `#F0F8FB`다.
+Chiron GoRound TC(SIL OFL 1.1)를 쓴다. 웹은 `packages/tokens/fonts/ChironGoRoundTC-KoreanLatin.woff2`, 안드로이드는 같은 글꼴의 가변 TTF(`android/src/main/res/font/chiron_goround_tc_variable.ttf`, wght 200–900)다. 라이선스 전문은 글꼴 옆(`ChironGoRoundTC-OFL.txt`, `android/OFL-ChironGoRoundTC.txt`)에 함께 있다. 소비 앱은 앱 안(설정의 오픈소스 고지 등)에도 이 고지를 넣어야 한다.
 
-가변 TTF는 스튜디오 woff2에서 `fontTools.ttLib.TTFont`로 `flavor = None` 후 저장해 만든다(부분 글꼴·인스턴스 고정 없음).
+## 가져다 쓰기
 
-## 소비 방식
-
-레지스트리 게시 없이 소비 저장소(`companion-server`, `companion-web`, `companion-car`, `companion-e2e`)가 이 저장소를 git 서브모듈 `shared/`로 두고 태그에 고정한다. 태그는 `v0.1.0`부터 새로 시작한다.
+소비 저장소에서 서브모듈로 두고 태그에 고정한다.
 
 ```sh
 git submodule add git@github.com:teamhey-challenge/companion-shared.git shared
-git -C shared checkout v0.1.0
+git -C shared checkout v0.5.2
 ```
 
-- JS: `"hey-tokens": "file:shared/packages/tokens"` (패키지 이름은 `packages/tokens/package.json` 참고)
+- JS/TS: `package.json`에 `"@darren-pleos-challenge/hey-tokens": "file:shared/packages/tokens"`(프로토콜은 `.../hey-protocol`, `file:shared/packages/protocol`)
+- CSS: `@darren-pleos-challenge/hey-tokens/tokens.css`
 - Android: `settings.gradle.kts`에 `includeBuild("shared/android")`
 
-## 로컬 점검
+## 토큰 다시 생성하기
 
-CI는 두지 않는다.
+`packages/tokens/hey.tokens.json`을 고친 뒤 생성기를 돌리면 `dist/tokens.css`, `dist/tokens.ts`, `android/src/main/kotlin/ai/hey/designsystem/token/HeyTokens.kt`가 갱신된다. 생성물은 함께 커밋한다.
 
 ```sh
 bun install
-bun run check          # 토큰 시험 + 생성물이 최신인지
-cd android && nice -n 19 ./gradlew --max-workers=2 :assembleRelease
+bun run tokens         # 생성
+bun run check          # 시험 + 생성물이 최신인지 + 스튜디오 토큰과 일치하는지
 ```
 
-테마 토큰 대비는 `packages/tokens/scripts/contrast.test.mjs`가 시험한다.
+토큰 값의 정본은 디자인 스튜디오 [`hey-companion-ui`](https://github.com/teamhey-challenge/hey-companion-ui)이고, 이 저장소의 `hey.tokens.json`은 그 사본이다. `bun run check:studio`가 둘을 비교한다(네트워크가 안 되면 건너뛰고, `STUDIO_TOKENS_STRICT=1`이면 실패한다).
 
-## 스튜디오와 토큰 동기화
-
-토큰 값의 정본은 디자인 스튜디오 `hey-companion-ui`의 `shared/packages/tokens/hey.tokens.json`(main)이다. 이 저장소의 `packages/tokens/hey.tokens.json`은 그 사본이며, 어긋나면 `bun run check`가 실패한다.
+Android 라이브러리 빌드:
 
 ```sh
-bun run check:studio    # git(SSH)으로 스튜디오 main 을 받아 토큰 단위로 비교(GitHub API 쿼터 안 씀)
-STUDIO_TOKENS_STRICT=1 bun run check:studio   # 못 받으면 건너뛰지 않고 실패
+cd android && ./gradlew :assembleRelease
 ```
 
-git 이 없거나 SSH 키·네트워크가 안 되면 안내만 찍고 건너뛴다(오프라인 안전). 야간 점검에는 위 명령을 쓴다. 스튜디오가 바뀌면 파일을 그대로 복사 → `bun run tokens` → PR → 태그 → 소비 앱 서브모듈 올리기 순서로 반영한다.
+## 버전
 
-## 링크
+`vMAJOR.MINOR.PATCH` 태그를 쓴다. 토큰 값이나 이름이 바뀌면 PR로 병합한 뒤 태그를 올리고, 소비 저장소에서 서브모듈 포인터를 새 태그로 옮긴다. CI는 `bun run check`를 돌린다.
+
+## 관련 저장소
 
 | 저장소 | 내용 |
 |---|---|
 | [companion-car](https://github.com/teamhey-challenge/companion-car) | 차량 앱 |
-| [companion-phone](https://github.com/teamhey-challenge/companion-phone) | 폰 앱(QR 연결·동의·기억 관리) |
+| [companion-phone](https://github.com/teamhey-challenge/companion-phone) | 폰 앱 |
 | [companion-server](https://github.com/teamhey-challenge/companion-server) | 대화·기억·TTS 서버 |
-| [companion-web](https://github.com/teamhey-challenge/companion-web) | 폰 웹·디자인 시스템 Storybook |
-| [companion-shared](https://github.com/teamhey-challenge/companion-shared) | 디자인 토큰·프로토콜(이 저장소) |
+| [companion-web](https://github.com/teamhey-challenge/companion-web) | 폰 웹·Storybook |
 
-## 라이선스
-
-코드는 MIT(`LICENSE`). 글꼴 Chiron GoRound TC는 SIL OFL 1.1이며 전문은 글꼴 옆 `*OFL*.txt`에 있다.
+코드는 MIT 라이선스([`LICENSE`](LICENSE))이고, 글꼴은 SIL OFL 1.1이다.
