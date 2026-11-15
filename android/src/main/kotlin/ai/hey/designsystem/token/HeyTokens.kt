@@ -36,6 +36,8 @@ object HeyTokens {
     val contentMaxWeb = 480.dp
     val carPageX = 80.dp
     val carPageY = 40.dp
+    val carIdentityCard = 400.dp
+    val carQr = 280.dp
     val brandHeight = 40.dp
     val carConditionIcon = 32.dp
     val webPageMin = 20.dp
@@ -63,6 +65,7 @@ object HeyTokens {
     val label = HeyTypeSpec(24.sp, 32.sp, 700, 0f)
     val caption = HeyTypeSpec(24.sp, 32.sp, 700, 0f)
     val metric = HeyTypeSpec(96.sp, 116.sp, 700, 0f)
+    val checkCode = HeyTypeSpec(256.sp, 256.sp, 700, -0.05f)
     val badge = HeyTypeSpec(20.sp, 24.sp, 700, 0f)
   }
 }
@@ -103,6 +106,7 @@ data class HeyColors(
     val buttonSecondaryPressed: Color,
     val fgOnSecondary: Color,
     val fgOnDanger: Color,
+    val brandLime: Color,
     val brandGreen: Color,
     val welcomeScrim: Color,
     val surfaceContainer: Color,
@@ -124,7 +128,7 @@ val HeyLightColors = HeyColors(
     bgInverse = Color(0xFF203847),
     fgDefault = Color(0xFF243F50),
     fgMuted = Color(0xFF456070),
-    fgSubtle = Color(0xFF49626F),
+    fgSubtle = Color(0xFF526D7C),
     fgDisabled = Color(0xFF879EA9),
     fgInverse = Color(0xFFF5FBFE),
     fgOnAccent = Color(0xFF203E50),
@@ -150,6 +154,7 @@ val HeyLightColors = HeyColors(
     buttonSecondaryPressed = Color(0xFFC5DCED),
     fgOnSecondary = Color(0xFF243F50),
     fgOnDanger = Color(0xFFFFFFFF),
+    brandLime = Color(0xFFA9D7EC),
     brandGreen = Color(0xFF8BCACA),
     welcomeScrim = Color(0x8C000000),
     surfaceContainer = Color(0xFFE4F1F7),
@@ -197,6 +202,7 @@ val HeyDarkColors = HeyColors(
     buttonSecondaryPressed = Color(0xFF254A62),
     fgOnSecondary = Color(0xFFE0F2F7),
     fgOnDanger = Color(0xFF202820),
+    brandLime = Color(0xFF8CD7DF),
     brandGreen = Color(0xFF86CFC8),
     welcomeScrim = Color(0x8C000000),
     surfaceContainer = Color(0xFF102D3B),
