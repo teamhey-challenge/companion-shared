@@ -9,7 +9,7 @@ export const tokens = {
       "bgInverse": "#203847",
       "fgDefault": "#243f50",
       "fgMuted": "#456070",
-      "fgSubtle": "#49626f",
+      "fgSubtle": "#526d7c",
       "fgDisabled": "#879ea9",
       "fgInverse": "#f5fbfe",
       "fgOnAccent": "#203e50",
@@ -35,6 +35,7 @@ export const tokens = {
       "buttonSecondaryPressed": "#c5dced",
       "fgOnSecondary": "#243f50",
       "fgOnDanger": "#ffffff",
+      "brandLime": "#a9d7ec",
       "brandGreen": "#8bcaca",
       "welcomeScrim": "#0000008c",
       "surfaceContainer": "#e4f1f7",
@@ -81,6 +82,7 @@ export const tokens = {
       "buttonSecondaryPressed": "#254a62",
       "fgOnSecondary": "#e0f2f7",
       "fgOnDanger": "#202820",
+      "brandLime": "#8cd7df",
       "brandGreen": "#86cfc8",
       "welcomeScrim": "#0000008c",
       "surfaceContainer": "#102d3b",
@@ -121,7 +123,7 @@ export const tokens = {
     "strong": 2,
     "focus": 3
   },
-  "fontFamily": "\"Chiron GoRound TC\", sans-serif",
+  "fontFamily": "\"Chiron GoRound TC\", \"Pretendard\", sans-serif",
   "type": {
     "web": {
       "display": {
@@ -210,6 +212,12 @@ export const tokens = {
         "weight": 700,
         "tracking": 0
       },
+      "checkCode": {
+        "size": 256,
+        "lineHeight": 256,
+        "weight": 700,
+        "tracking": -0.05
+      },
       "badge": {
         "size": 20,
         "lineHeight": 24,
@@ -227,6 +235,8 @@ export const tokens = {
     "contentMaxWeb": 480,
     "carPageX": 80,
     "carPageY": 40,
+    "carIdentityCard": 400,
+    "carQr": 280,
     "brandHeight": 40,
     "carConditionIcon": 32,
     "webPageMin": 20,

@@ -8,7 +8,9 @@ function luminance(hex) {
     .reduce((sum, v, i) => sum + v * [.2126, .7152, .0722][i], 0);
 }
 for (const [theme, tokens] of Object.entries(color)) test(`${theme}: enabled text and action semantic pairs meet 4.5:1`, () => {
-  const pairs = ['fg-default', 'fg-muted', 'fg-subtle'].flatMap(fg => ['bg-page', 'bg-surface', 'bg-raised', 'accent-container', 'danger-container', 'success-container', 'warning-container', 'info-container', 'button-secondary'].map(bg => [fg, bg]));
+  const surfaces = ['bg-page', 'bg-surface', 'bg-raised'], containers = ['accent-container', 'danger-container', 'success-container', 'warning-container', 'info-container', 'button-secondary'];
+  // fg-subtle(보조 글씨)는 스튜디오 검사와 같이 면(bg-*) 위에서만 4.5:1을 요구한다. 컨테이너 위는 fg-default·fg-muted만.
+  const pairs = [['fg-default', 'fg-muted'].flatMap(fg => [...surfaces, ...containers].map(bg => [fg, bg])), surfaces.map(bg => ['fg-subtle', bg])].flat();
   pairs.push(['fg-inverse', 'bg-inverse'], ['fg-on-accent', 'accent'], ['fg-on-accent', 'accent-pressed'], ['fg-on-primary', 'primary'], ['fg-on-primary', 'primary-pressed'], ['fg-on-secondary', 'button-secondary'], ['fg-on-secondary', 'button-secondary-pressed'], ['fg-on-danger', 'danger']);
   for (const state of ['success', 'warning', 'danger', 'info']) pairs.push([state, `${state}-container`]);
   for (const [fg, bg] of pairs) {

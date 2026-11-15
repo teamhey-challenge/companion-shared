@@ -43,6 +43,17 @@ cd android && nice -n 19 ./gradlew --max-workers=2 :assembleRelease
 
 테마 토큰 대비는 `packages/tokens/scripts/contrast.test.mjs`가 시험한다.
 
+## 스튜디오와 토큰 동기화
+
+토큰 값의 정본은 디자인 스튜디오 `hey-companion-ui`의 `shared/packages/tokens/hey.tokens.json`(main)이다. 이 저장소의 `packages/tokens/hey.tokens.json`은 그 사본이며, 어긋나면 `bun run check`가 실패한다.
+
+```sh
+bun run check:studio    # gh api 로 스튜디오 main 파일을 받아 토큰 단위로 비교
+STUDIO_TOKENS_STRICT=1 bun run check:studio   # gh 가 없거나 못 받으면 건너뛰지 않고 실패
+```
+
+`gh` 가 없거나 로그인·네트워크가 안 되면 안내만 찍고 건너뛴다(오프라인 안전). 야간 점검에는 위 명령을 쓴다. 스튜디오가 바뀌면 파일을 그대로 복사 → `bun run tokens` → PR → 태그 → 소비 앱 서브모듈 올리기 순서로 반영한다.
+
 ## 링크
 
 | 저장소 | 내용 |

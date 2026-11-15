@@ -23,7 +23,7 @@
   --hey-border-hairline: 1px;
   --hey-border-strong: 2px;
   --hey-border-focus: 3px;
-  --hey-font-family: "Chiron GoRound TC", sans-serif;
+  --hey-font-family: "Chiron GoRound TC", "Pretendard", sans-serif;
   --hey-type-display-size: 36px;
   --hey-type-display-line: 44px;
   --hey-type-display-weight: 700;
@@ -60,6 +60,8 @@
   --hey-size-content-max-web: 480px;
   --hey-size-car-page-x: 80px;
   --hey-size-car-page-y: 40px;
+  --hey-size-car-identity-card: 400px;
+  --hey-size-car-qr: 280px;
   --hey-size-brand-height: 40px;
   --hey-size-car-condition-icon: 32px;
   --hey-size-web-page-min: 20px;
@@ -87,7 +89,7 @@
   --hey-color-bg-inverse: #203847;
   --hey-color-fg-default: #243f50;
   --hey-color-fg-muted: #456070;
-  --hey-color-fg-subtle: #49626f;
+  --hey-color-fg-subtle: #526d7c;
   --hey-color-fg-disabled: #879ea9;
   --hey-color-fg-inverse: #f5fbfe;
   --hey-color-fg-on-accent: #203e50;
@@ -113,6 +115,7 @@
   --hey-color-button-secondary-pressed: #c5dced;
   --hey-color-fg-on-secondary: #243f50;
   --hey-color-fg-on-danger: #ffffff;
+  --hey-color-brand-lime: #a9d7ec;
   --hey-color-brand-green: #8bcaca;
   --hey-color-welcome-scrim: #0000008c;
   --hey-color-surface-container: #e4f1f7;
@@ -163,6 +166,7 @@
   --hey-color-button-secondary-pressed: #254a62;
   --hey-color-fg-on-secondary: #e0f2f7;
   --hey-color-fg-on-danger: #202820;
+  --hey-color-brand-lime: #8cd7df;
   --hey-color-brand-green: #86cfc8;
   --hey-color-welcome-scrim: #0000008c;
   --hey-color-surface-container: #102d3b;

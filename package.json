@@ -7,7 +7,8 @@
     "tokens": "bun run --cwd packages/tokens build",
     "check:tokens": "bun run tokens && git diff --exit-code -- packages/tokens/dist android/src",
     "test": "bun run --filter '*' test",
-    "check": "bun run test && bun run check:tokens"
+    "check:studio": "bun run scripts/compare-studio-tokens.ts",
+    "check": "bun run test && bun run check:tokens && bun run check:studio"
   },
   "devDependencies": {
     "@types/bun": "^1.3.0",
