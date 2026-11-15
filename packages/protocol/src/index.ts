@@ -55,7 +55,6 @@ export type ErrorCode = (typeof ERROR_CODES)[number];
 export interface RegisterRequest { installId: string }
 export interface RegisterResponse { carToken: string }
 export interface SessionResponse { sessionId: string; wsTicket: string; expiresInSec: number }
-export const PROVISION_HEADER = "X-Provision-Secret";
 
 // ---- REST (contract.md, 공개 주소의 /api 뒤) ----
 export const CONSENT_TYPES = ["terms", "privacy", "record", "memory", "external_ai"] as const;
