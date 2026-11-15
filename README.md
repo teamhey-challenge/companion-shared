@@ -28,8 +28,8 @@ git submodule add git@github.com:teamhey-challenge/companion-shared.git shared
 git -C shared checkout v0.5.2
 ```
 
-- JS/TS: `package.json`에 `"@darren-pleos-challenge/hey-tokens": "file:shared/packages/tokens"`(프로토콜은 `.../hey-protocol`, `file:shared/packages/protocol`)
-- CSS: `@darren-pleos-challenge/hey-tokens/tokens.css`
+- JS/TS: `package.json`에 `"@teamhey/hey-tokens": "file:shared/packages/tokens"`(프로토콜은 `.../hey-protocol`, `file:shared/packages/protocol`)
+- CSS: `@teamhey/hey-tokens/tokens.css`
 - Android: `settings.gradle.kts`에 `includeBuild("shared/android")`
 
 ## 토큰 다시 생성하기
