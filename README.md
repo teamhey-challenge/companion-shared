@@ -24,7 +24,7 @@ TTF 재생성은 `fontTools`(`instancer` 후 `subset`)로 한다. 한글은 KS X
 레지스트리 게시 없이 소비 저장소(`companion-server`, `companion-web`, `companion-car`, `companion-e2e`)가 이 저장소를 git 서브모듈 `shared/`로 두고 태그에 고정한다. 태그는 `v0.1.0`부터 새로 시작한다.
 
 ```sh
-git submodule add git@github.com:darren-pleos-challenge/companion-shared.git shared
+git submodule add git@github.com:teamhey-challenge/companion-shared.git shared
 git -C shared checkout v0.1.0
 ```
 
@@ -47,11 +47,11 @@ cd android && nice -n 19 ./gradlew --max-workers=2 :assembleRelease
 
 | 저장소 | 내용 |
 |---|---|
-| [companion-car](https://github.com/darren-pleos-challenge/companion-car) | 차량 앱 |
-| [companion-phone](https://github.com/darren-pleos-challenge/companion-phone) | 폰 앱(QR 연결·동의·기억 관리) |
-| [companion-server](https://github.com/darren-pleos-challenge/companion-server) | 대화·기억·TTS 서버 |
-| [companion-web](https://github.com/darren-pleos-challenge/companion-web) | 폰 웹·디자인 시스템 Storybook |
-| [companion-shared](https://github.com/darren-pleos-challenge/companion-shared) | 디자인 토큰·프로토콜(이 저장소) |
+| [companion-car](https://github.com/teamhey-challenge/companion-car) | 차량 앱 |
+| [companion-phone](https://github.com/teamhey-challenge/companion-phone) | 폰 앱(QR 연결·동의·기억 관리) |
+| [companion-server](https://github.com/teamhey-challenge/companion-server) | 대화·기억·TTS 서버 |
+| [companion-web](https://github.com/teamhey-challenge/companion-web) | 폰 웹·디자인 시스템 Storybook |
+| [companion-shared](https://github.com/teamhey-challenge/companion-shared) | 디자인 토큰·프로토콜(이 저장소) |
 
 ## 라이선스
 
