@@ -1,6 +1,6 @@
 # companion-shared
 
-차량 캐릭터 AI 컴패니언(임시 이름 `companion-*`)의 공유 저장소다. 디자인 토큰 파이프라인과 Android Compose 토큰 라이브러리를 담는다. HEY 시절 `hey-shared`에서 `packages/tokens`·`android`만 기록째 떼어 왔다.
+차량 캐릭터 AI 컴패니언(앱 Hey, 캐릭터 헤이파리, 팀 Team Hey. 저장소 이름 `companion-*`은 그대로)의 공유 저장소다. 디자인 토큰 파이프라인과 Android Compose 토큰 라이브러리를 담는다. HEY 시절 `hey-shared`에서 `packages/tokens`·`android`만 기록째 떼어 왔다.
 
 ## 구성
 
